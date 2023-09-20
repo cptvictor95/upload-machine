@@ -1,10 +1,28 @@
 "use client";
 
 import { useFileUpload } from "@/contexts/FileUploadContext";
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
+export interface FileInputProps {
+  name: string;
+}
 
-const FileInput = ({ control, name }) => {
+/**
+ *
+ * @description Passando as props pro FileInput diretamente, você tira a responsabilidade do hook de lógica do formulário e coloca no componente do próprio documento a ser inserido.
+ *
+ * @todo Aqui você pode inserir mais props para o FileInput, como por exemplo:
+ * * label,
+ * * maxFileSize
+ * * minFileSize
+ * * acceptedTypes
+ * * etc
+ *
+ * @todo Aqui você pode usar outros elementos de UI relacionados ao campo de arquivo, como por exemplo:
+ * * error message
+ */
+const FileInput = ({ name }: FileInputProps) => {
   const { updateFile } = useFileUpload();
+  const { control } = useFormContext();
 
   return (
     <div className="flex flex-col gap-2">
